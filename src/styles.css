@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+.dv-mainapp{
+    float: right;
+    margin-top: -22px;
+}
+.dv-sidebr{}
+
+.dash-main { padding-top: 61px; min-height: 100%; overflow: hidden; padding-bottom: 10px; }
+.dv-frst{
+background: #414eae;width: 275px;height: 100px;margin-left: 115px;border-radius: 10px;}
+.dv-snd{ background  : #ee5f66;width: 275px;height: 100px;margin-left: 200px;border-radius: 10px;
+}
+.dv-frst p{color: white;font-size: 20px;padding: 35px;}
+.dv-snd p{color: white;font-size: 20px;padding: 35px;}
+
+.adddata{
+    margin-left:30px;
+    padding-bottom:20px;
+}
+
+.submitbtn{
+    margin-left:15px;
+}
+.dv-frm .col-md-4{width: 25%;}
+.dv-headr{padding: 14px;background: #d7d7d75c;color: #4b639f;font-size: 25px;margin-left: 9px;margin-bottom: 10px;}
+.dv-tble{padding: 80px;}
+.dv-tble .table{border:solid #101a33 2px}
+.dv-tble i{cursor: pointer;}
+.dv-frm label{color: #666c7a;font-size: 11px;}
+.dv-frm small{color: red;}
