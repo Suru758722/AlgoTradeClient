@@ -2,12 +2,16 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse dv-navbar">
       
       <ul class="nav nav-sidebar" id="myGroup">
-          <li >
+          <li [routerLink]="['/admin/dashboard']">
               <a class="admin">
                   <i class="fa fa-home"></i> Dashboard <span class="sr-only"></span>
               </a>
           </li>
-          
+          <li [routerLink]="['/admin/analysis']">
+            <a class="admin">
+                <i class="fa fa-pie-chart"></i> Analysis <span class="sr-only"></span>
+            </a>
+        </li>
       </ul>
   </div>
 </div>

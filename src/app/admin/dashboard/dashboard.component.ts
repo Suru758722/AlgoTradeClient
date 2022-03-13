@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   vm: any;
   title = 'NSEApp';
   lineSeries: any
-  data: any[] = [{ time: 1556877600, value: 17100 }]
+  data: any[] = []
   dispatch: any;
   constructor() {
   //   interval(5000).subscribe(x => {
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
   updateData(state) {
     Object.assign(this.state, state) 
-    const now = Date(this.state.Time)
+    const now = Date.now()
     this.lineSeries.update({ time: now, value: this.state.Chart })
   }
   ngOnInit() {
