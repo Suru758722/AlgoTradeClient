@@ -11,8 +11,8 @@
   </div>
   <div class="col-md-8">
     <div class="">
-
-      <button style="float: left" class="btn btn-primary">Download</button>
+      <input id="file"  accept=".xlsx, .csv, .xls" type="file" />
+      <button (click)="sendFile($event)" style="float: left" class="btn btn-primary">Download</button>
     
 
     </div>

@@ -3,35 +3,44 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
-    <div class="dv-sidebr">
+      <div class="dv-sidebr">
 
-      <app-sidebar></app-sidebar>
+        <app-sidebar></app-sidebar>
 
+      </div>
     </div>
-  </div>
-  <div class="col-md-8">
-    <div class="dv-mainapp">
+    <div class="col-md-8">
+      <div class="dv-mainapp">
 
-      <div class="dash-main">
-       
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            {{state.Chart}}
-           
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li (click)="changeTimeFrame()">Minute</li>
-            <li>Day</li>
-            <li>Week</li>
-           
-          </ul>
+        <div class="dash-main">
+          <div class="dropdown">
+            <div class="row">
+          <form [formGroup]="marketForm">
+
+              <div class="col-md-3">
+                <select formControlName="InstrumentId"  type="number" class="form-control">
+                  <option value="">-- Select a Instrument --</option>
+                  <option value={{instru.id}} *ngFor="let instru of instrumentList">
+                    {{instru.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select formControlName="Frame" type="text" class="form-control">
+                  <option  value="min">Min</option>
+                  <option value="hr">Hour</option>
+                  <option value="day">Day</option>
+                </select>
+              </div>
+        </form>
+
+            </div>
+          </div>
+
+          <div id="chart"></div>
         </div>
 
-
-        <div id="chart"></div>
       </div>
-
     </div>
-  </div>
   </div>
 </div>

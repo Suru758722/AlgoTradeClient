@@ -5,13 +5,20 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { AdminService } from '../service/admin.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent, SidebarComponent, AnalysisComponent],
   imports: [
     CommonModule,
     SharedModule,
-    AdminRoutingModule
-  ]
+    AdminRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,  
+  ],
+  providers:[AdminService]
 })
 export class AdminModule { }

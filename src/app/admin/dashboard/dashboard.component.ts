@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+//import { createChart } from 'lightweight-charts';
+
 import { interval } from 'rxjs';
+import { AdminService } from 'src/app/service/admin.service';
 declare var LightweightCharts: any
 declare var require: any
 const dotnetify: any = require('dotnetify');
 dotnetify.hubServerUrl = 'http://localhost:46194';
-import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,29 +22,38 @@ export class DashboardComponent implements OnInit {
   lineSeries: any
   data: any[] = []
   dispatch: any;
-  constructor() {
-  //   interval(5000).subscribe(x => {
-  //     this.getChartData();
-  // });
+  instrumentList: any[] = [];
+  marketForm: FormGroup
+  updateOnce: boolean = true;
+  constructor(private fb: FormBuilder, private adminService: AdminService) {
+  
   this.vm = dotnetify.connect('LiveChartVM', {      
     getState: () => this.state,
     setState: (state: any) =>  this.updateData(state)
   });
   
+  this.initilizeForm()
   
   }
-  changeTimeFrame(){
-    this.state.TimeFrame = 'Day'
-    this.vm.$dispatch(this.state)
-    this.vm.$dispatch({UpdateData: 'name'})
+ 
+  initilizeForm() {
+    this.marketForm = this.fb.group({
+      InstrumentId: [0],
+      Frame: ['min'],
+      
+    })
   }
   updateData(state) {
     Object.assign(this.state, state) 
     const now = Date.now()
     this.lineSeries.update({ time: now, value: this.state.Chart })
+
+    if(this.updateOnce){
+    this.initilizeEverything()
+        this.updateOnce = false
+    }
   }
   ngOnInit() {
-  
     var chart = LightweightCharts.createChart(document.getElementById('chart'), {
       width: 600,
       height: 300,
@@ -65,11 +78,28 @@ export class DashboardComponent implements OnInit {
     this.lineSeries = chart.addLineSeries();
     this.lineSeries.setData(this.data)
 
-    
+  }
+  initilizeEverything() {    
+
+    this.adminService.getAll('Analysis/GetInstrument').subscribe((data: any) =>{
+        this.instrumentList = data;
+        this.marketForm.controls.InstrumentId.setValue(data[0].id);
+        this.state.TimeFrame = 'min';
+        this.state.Instrument = data[0].id
+        this.vm.$dispatch(this.state)
+    })
+
+    this.marketForm.controls.Frame.valueChanges.subscribe((data) =>{
+        this.state.TimeFrame =  data
+        this.vm.$dispatch(this.state)
+    })
+    this.marketForm.controls.InstrumentId.valueChanges.subscribe((data) =>{
+        this.state.Instrument =  data
+        this.vm.$dispatch(this.state)
+        //this.vm.$dispatch({UpdateData: 'name'})
+
+    })
   }
 
- getChartData(){
-  
-}
-
+ 
 }
