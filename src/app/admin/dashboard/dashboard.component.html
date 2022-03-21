@@ -15,24 +15,24 @@
         <div class="dash-main">
           <div class="dropdown">
             <div class="row">
-          <form [formGroup]="marketForm">
+              <form [formGroup]="marketForm">
 
-              <div class="col-md-3">
-                <select formControlName="InstrumentId"  type="number" class="form-control">
-                  <option value="">-- Select a Instrument --</option>
-                  <option value={{instru.id}} *ngFor="let instru of instrumentList">
-                    {{instru.name}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <select formControlName="Frame" type="text" class="form-control">
-                  <option  value="min">Min</option>
-                  <option value="hr">Hour</option>
-                  <option value="day">Day</option>
-                </select>
-              </div>
-        </form>
+                <div class="col-md-3">
+                  <select formControlName="InstrumentId" type="number" class="form-control">
+                    <!-- <option value="">-- Select a Instrument --</option> -->
+                    <option value={{instru.id}} *ngFor="let instru of instrumentList">
+                      {{instru.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select formControlName="Frame" type="text" class="form-control">
+                    <option value={{time.frame}} *ngFor="let time of timeFrameList">
+                      {{time.frame}}
+                    </option>
+                  </select>
+                </div>
+              </form>
 
             </div>
           </div>
@@ -41,6 +41,9 @@
         </div>
 
       </div>
+    </div>
+    <div class="col-md-8">
+      <app-volume></app-volume>
     </div>
   </div>
 </div>

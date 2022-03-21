@@ -7,12 +7,13 @@ const dotnetify: any = require('dotnetify');
 dotnetify.hubServerUrl = 'http://localhost:46194';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-volume',
+  templateUrl: './volume.component.html',
+  styleUrls: ['./volume.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class VolumeComponent implements OnInit {
 
+ 
   state: any = {};
   vm: any;
   title = 'NSEApp';
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit {
   updateOnce: boolean = true;
   constructor(private fb: FormBuilder, private adminService: AdminService) {
   
-  this.vm = dotnetify.connect('LiveChartVM', {      
+  this.vm = dotnetify.connect('LiveVolumeVM', {      
     getState: () => "",//this.state,
     setState: (state: any) =>  this.updateData(state)
   });
@@ -56,7 +57,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   ngOnInit() {
-    var chart = LightweightCharts.createChart(document.getElementById('chart'), {
+    var chart = LightweightCharts.createChart(document.getElementById('volChart'), {
       width: 600,
       height: 300,
       layout: {
@@ -106,5 +107,4 @@ export class DashboardComponent implements OnInit {
     })
   }
 
- 
 }

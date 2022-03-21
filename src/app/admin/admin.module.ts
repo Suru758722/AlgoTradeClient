@@ -8,9 +8,10 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { AdminService } from '../service/admin.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VolumeComponent } from './volume/volume.component';
 
 @NgModule({
-  declarations: [DashboardComponent, SidebarComponent, AnalysisComponent],
+  declarations: [DashboardComponent, SidebarComponent, AnalysisComponent, VolumeComponent],
   imports: [
     CommonModule,
     SharedModule,
