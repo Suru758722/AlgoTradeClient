@@ -9,41 +9,71 @@
 
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="dv-mainapp">
+    <div class="col-md-10 dv-main">
+      <div class="row">
+        <div>
+          <button data-toggle="modal" data-target="#confirmModel" style="float: right;" type="button"
+            class="btn btn-primary">Delete Data</button>
+        </div>
+        <div class="dv-mainapp">
 
-        <div class="dash-main">
-          <div class="dropdown">
-            <div class="row">
-              <form [formGroup]="marketForm">
+          <div class="dash-main">
+            <div class="dropdown">
+              <div class="row">
+                <form [formGroup]="marketForm">
 
-                <div class="col-md-3">
-                  <select formControlName="InstrumentId" type="number" class="form-control">
-                    <!-- <option value="">-- Select a Instrument --</option> -->
-                    <option value={{instru.id}} *ngFor="let instru of instrumentList">
-                      {{instru.name}}
-                    </option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select formControlName="Frame" type="text" class="form-control">
-                    <option value={{time.frame}} *ngFor="let time of timeFrameList">
-                      {{time.frame}}
-                    </option>
-                  </select>
-                </div>
-              </form>
+                  <div class="col-md-3">
+                    <select formControlName="InstrumentId" type="number" class="form-control">
+                      <!-- <option value="">-- Select a Instrument --</option> -->
+                      <option value={{instru}} *ngFor="let instru of instrumentList">
+                        {{instru}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <select formControlName="Frame" type="text" class="form-control">
+                      <option value={{time.frame}} *ngFor="let time of timeFrameList">
+                        {{time.frame}}
+                      </option>
+                    </select>
+                  </div>
+                </form>
 
+              </div>
             </div>
+
+            <div id="chart"></div>
           </div>
 
-          <div id="chart"></div>
         </div>
+        <div class="dv-mainapp dv-vlm">
 
+          <app-volume></app-volume>
+
+        </div>
       </div>
     </div>
-    <div class="col-md-8">
-      <app-volume></app-volume>
+
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="confirmModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="deleteOldData()" data-toggle="modal" data-dismiss="modal"
+          data-target="#signupModel" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-danger" id="loginClose" data-dismiss="modal">No</button>
+      </div>
     </div>
   </div>
 </div>

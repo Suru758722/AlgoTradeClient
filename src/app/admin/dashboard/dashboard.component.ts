@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   vm: any;
   title = 'NSEApp';
   lineSeries: any
+  
   data: any[] = []
   dispatch: any;
   instrumentList: any[] = [];
@@ -45,20 +46,24 @@ export class DashboardComponent implements OnInit {
   updateData(state) {
     console.log(state)
     Object.assign(this.state, state) 
-    const now = Date.now()
-    this.lineSeries.update({ time: now, value: this.state.Chart })
 
     if(this.updateOnce){
       this.marketForm.controls.InstrumentId.setValue(this.state.Instrument);
       this.marketForm.controls.Frame.setValue(this.state.TimeFrame);
-
         this.updateOnce = false
+        this.lineSeries.setData(this.state.chartList)
+    }else{
+      if(this.state.Chart !=0 && this.state.Time != null){
+       
+      this.lineSeries.update({ time: this.state.Time, value: this.state.Chart })
+      }
+
     }
   }
   ngOnInit() {
     var chart = LightweightCharts.createChart(document.getElementById('chart'), {
-      width: 600,
-      height: 300,
+      width: 900,
+      height: 400,
       layout: {
         backgroundColor: '#ffffff',
         textColor: 'rgba(33, 56, 77, 1)',
@@ -78,7 +83,8 @@ export class DashboardComponent implements OnInit {
     });
 
     this.lineSeries = chart.addLineSeries();
-    this.lineSeries.setData(this.data)
+    //this.lineSeries.setData(this.data)
+
     this.initilizeEverything()
 
   }
@@ -95,16 +101,25 @@ export class DashboardComponent implements OnInit {
     this.marketForm.controls.Frame.valueChanges.subscribe((data) =>{
         //this.state.TimeFrame =  data
        // this.vm.$dispatch(this.state)
+       this.updateOnce = true
+
        this.vm.$dispatch({UpdateTime: data})
 
     })
     this.marketForm.controls.InstrumentId.valueChanges.subscribe((data) =>{
        // this.state.Instrument =  data
       //  this.vm.$dispatch(this.state)
+        this.updateOnce = true
         this.vm.$dispatch({UpdateInstrument: data})
 
     })
   }
-
- 
+  deleteOldData(){
+    this.adminService.get('Analysis/DeleteOldData').subscribe((data: any) =>{
+      
+  })
+  }
+  ngOnDestroy(){
+   this.vm.$destroy()
+ }
 }

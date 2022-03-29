@@ -1,1 +1,27 @@
-<div id="volChart"></div>
+<div class="dash-main">
+    <div class="dropdown">
+      <div class="row">
+        <form [formGroup]="marketForm">
+
+          <div class="col-md-3">
+            <select formControlName="InstrumentId" type="number" class="form-control">
+              <!-- <option value="">-- Select a Instrument --</option> -->
+              <option value={{instru}} *ngFor="let instru of instrumentList">
+                {{instru}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select formControlName="Frame" type="text" class="form-control">
+              <option value={{time.frame}} *ngFor="let time of timeFrameList">
+                {{time.frame}}
+              </option>
+            </select>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <div id="volChart"></div>
+  </div>

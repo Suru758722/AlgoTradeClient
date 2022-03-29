@@ -28,3 +28,4 @@ background: #414eae;width: 275px;height: 100px;margin-left: 115px;border-radius:
 .dv-tble i{cursor: pointer;}
 .dv-frm label{color: #666c7a;font-size: 11px;}
 .dv-frm small{color: red;}
+.dv-main{overflow-y: auto;height:570px;}

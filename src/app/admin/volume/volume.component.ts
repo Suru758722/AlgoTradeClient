@@ -46,20 +46,21 @@ export class VolumeComponent implements OnInit {
   updateData(state) {
     console.log(state)
     Object.assign(this.state, state) 
-    const now = Date.now()
-    this.lineSeries.update({ time: now, value: this.state.Chart })
-
+   
     if(this.updateOnce){
       this.marketForm.controls.InstrumentId.setValue(this.state.Instrument);
       this.marketForm.controls.Frame.setValue(this.state.TimeFrame);
+      this.updateOnce = false
+      this.lineSeries.setData(this.state.volumeList);
+    }else{
+      this.lineSeries.update({ time: this.state.Time, value: this.state.Volume })
 
-        this.updateOnce = false
     }
   }
   ngOnInit() {
     var chart = LightweightCharts.createChart(document.getElementById('volChart'), {
-      width: 600,
-      height: 300,
+      width: 900,
+      height: 400,
       layout: {
         backgroundColor: '#ffffff',
         textColor: 'rgba(33, 56, 77, 1)',
@@ -96,6 +97,7 @@ export class VolumeComponent implements OnInit {
     this.marketForm.controls.Frame.valueChanges.subscribe((data) =>{
         //this.state.TimeFrame =  data
        // this.vm.$dispatch(this.state)
+       this.updateOnce = true
        this.vm.$dispatch({UpdateTime: data})
 
     })
@@ -106,5 +108,7 @@ export class VolumeComponent implements OnInit {
 
     })
   }
-
+  ngOnDestroy(){
+    this.vm.$destroy()
+  }
 }
